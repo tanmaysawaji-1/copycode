@@ -1,0 +1,431 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --font-sans: 'Inter', sans-serif;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #fdfaf6;
+  --color-primary-brand: #4184f3; /* Matching dashboard blue */
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --border-radius-md: 6px;
+  --border-radius-lg: 10px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+a {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--color-text-primary);
+}
+
+.Statsdiv p {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+.Statsdiv h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.pricingdiv {
+  display: inline-block;
+  padding: 20px;
+  border-radius: var(--border-radius-lg);
+  background: var(--color-background-secondary);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pricingdiv:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.pricingpara {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+.pricinghed {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.Educationpara {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+.Educationhead {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.navlink {
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 15px;
+}
+.navlink:hover {
+  color: var(--color-primary-brand);
+}
+.navbta {
+  color: var(--color-text-secondary);
+}
+
+.Footerhead {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+}
+.footerul li {
+  margin-bottom: 10px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+.footerul li:hover {
+  color: var(--color-primary-brand);
+  cursor: pointer;
+}
+
+#supportHero {
+  background-color: var(--color-primary-brand);
+  color: white;
+  padding: 60px 0;
+}
+#supportHero a {
+  color: white;
+  text-decoration: underline;
+}
+
+#supportWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: 0 20px;
+  align-items: center;
+}
+
+#supportHero input {
+  padding: 16px 30px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: var(--border-radius-lg);
+  border: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  outline: none;
+}
+#supportHero input:focus {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Overlay */
+.signupwrapper {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+}
+
+/* Modal */
+.signup-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Content */
+.signup-content {
+  width: 900px;
+  height: 520px;
+  background: var(--color-background-primary);
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+/* Left section */
+.left-section {
+  width: 50%;
+  padding: 50px;
+  color: white;
+  background: var(--color-primary-brand);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.left-section h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+}
+
+.intraday {
+  font-size: 18px;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* Right section */
+.right-section {
+  width: 50%;
+  padding: 50px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.right-section h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+  color: var(--color-text-primary);
+}
+
+/* Close */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  transition: color 0.2s;
+}
+.close-btn:hover {
+  color: var(--color-text-primary);
+}
+
+/* Google button */
+.google-btn {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  background: var(--color-background-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--color-text-primary);
+  transition: background 0.2s;
+}
+.google-btn:hover {
+  background: #f9f9f9;
+}
+.google-btn img {
+  width: 18px;
+}
+
+/* OR divider */
+.or-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 0;
+}
+.or-divider span {
+  flex: 1;
+  height: 1px;
+  background: #eeeeee;
+}
+.or-divider p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+}
+
+/* Input */
+.right-section input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-bottom: 2px solid #eeeeee;
+  outline: none;
+  margin-bottom: 30px;
+  font-size: 16px;
+  color: var(--color-text-primary);
+  background: transparent;
+  transition: border-bottom-color 0.2s;
+}
+.right-section input:focus {
+  border-bottom-color: var(--color-primary-brand);
+}
+
+/* Continue button */
+.continue-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--color-primary-brand);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.continue-btn:hover {
+  background: #3b76db;
+}
+.continue-btn:active {
+  transform: scale(0.98);
+}
+
+/* Terms */
+.terms {
+  margin-top: 20px;
+  font-size: 12px;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+.terms a {
+  color: var(--color-primary-brand);
+  text-decoration: none;
+}
+.terms a:hover {
+  text-decoration: underline;
+}
+
+/* =====================
+   Image Sizing Utilities
+   ===================== */
+
+/* Hero section banner image */
+.hero-img {
+  display: block;
+  margin: 0 auto 24px;
+  max-width: 760px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Stats / Ecosystem side image */
+.ecosystem-img {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Awards — largest broker SVG badge */
+.awards-badge-img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Awards — press logos strip */
+.press-logos-img {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  object-fit: contain;
+  margin-top: 24px;
+}
+
+/* Education section SVG */
+.education-img {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Product Left / Right section — main product screenshot */
+.product-img {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  margin: 0 auto;
+}
+
+/* App store / Google Play badges */
+.store-badge-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: inline-block;
+}
+
+/* Universe logos grid */
+.universe-logo-img {
+  display: block;
+  height: 48px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  margin: 0 auto 8px;
+}
+
+/* Footer — brand logo */
+.footer-logo-img {
+  display: block;
+  width: 100%;
+  max-width: 140px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
+/* Footer — regulatory / exchange symbols strip */
+.footer-symbols-img {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  object-fit: contain;
+  margin-top: 16px;
+}
+
+/* Navbar — brand logo */
+.navbar-logo-img {
+  display: block;
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
