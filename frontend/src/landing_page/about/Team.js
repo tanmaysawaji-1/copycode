@@ -15,21 +15,21 @@ function Team() {
                 {/* Left Column - Image */}
                 <div className="col-md-4 text-center">
                     <img
-                        src="resourses/nithinKamath.jpg"
-                        alt="Nithin Kamath"
+                        src="resourses/tanmaysawaji.jpg"
+                        alt="Tanmay Sawaji"
                         className="img-fluid rounded-circle mb-3"
                         style={{ width: "250px" }}
                     />
-                    <h4>Nithin Kamath</h4>
+                    <h4>Tanmay Sawaji</h4>
                     <p className="text-muted">Founder, CEO</p>
                 </div>
 
                 {/* Right Column - Text */}
                 <div className="col-md-8">
                     <p>
-                        Nithin bootstrapped and founded Zerodha in 2010 to overcome the
+                        Tanmay bootstrapped and founded TradeZenith in 2010 to overcome the
                         hurdles he faced during his decade long stint as a trader. Today,
-                        Zerodha has changed the landscape of the Indian broking industry.
+                        TradeZenith has changed the landscape of the Indian broking industry.
                     </p>
 
                     <p>

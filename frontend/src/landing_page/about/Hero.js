@@ -23,8 +23,8 @@ function Hero() {
           <p className="fs-6 mb-3">
             We kick-started operations on the 15th of August, 2010 with the goal
             of breaking all barriers that traders and investors face in India in
-            terms of cost, support, and technology. We named the company Zerodha,
-            a combination of Zero and "Rodha", the Sanskrit word for barrier.
+            terms of cost, support, and technology. We named the company TradeZenith,
+            a combination of Trade and "Zenith", the Sanskrit word for barrier.
           </p>
 
           <p className="fs-6 mb-3">

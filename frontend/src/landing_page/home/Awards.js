@@ -8,7 +8,7 @@ function Awards() {
                 </div>
                 <div className='col-6'>
                     <h1 className='mb-3 fs-3'>Largest stock broker in india</h1>
-                    <p className='fs-5'>2+ million Zerodha clients contribute to over 15% of all retail order volumes in india daily by trading ad investing in:</p>
+                    <p className='fs-5'>2+ million TradeZenith clients contribute to over 15% of all retail order volumes in india daily by trading ad investing in:</p>
                     <div className='row'>
                         <div className='col-6'>
                             <ul >
