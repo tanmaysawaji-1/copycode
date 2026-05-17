@@ -15,7 +15,7 @@ function Team() {
                 {/* Left Column - Image */}
                 <div className="col-md-4 text-center">
                     <img
-                        src="resourses/tanmaysawaji.jpg"
+                        src="resourses/tanmaysawaji.png"
                         alt="Tanmay Sawaji"
                         className="img-fluid rounded-circle mb-3"
                         style={{ width: "250px" }}
