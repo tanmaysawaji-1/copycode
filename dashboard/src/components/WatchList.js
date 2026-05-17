@@ -1,16 +1,18 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import axios from "axios";
 import GeneralContext from "./GeneralContext";
 
 const API_URL = process.env.REACT_APP_API_URL || "https://hungryhub-backend-bgem.onrender.com";
+const PRICE_POLL_INTERVAL = 15000; // 15 seconds
 
 const WatchList = () => {
-  const [watchlist, setWatchlist]       = useState([]);
-  const [query, setQuery]               = useState("");
+  const [watchlist, setWatchlist]         = useState([]);
+  const [query, setQuery]                 = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [isSearching, setIsSearching]   = useState(false);
-  const [loading, setLoading]           = useState(true);
+  const [isSearching, setIsSearching]     = useState(false);
+  const [loading, setLoading]             = useState(true);
 
+  // Initial watchlist load
   useEffect(() => {
     axios.get(`${API_URL}/watchlist`)
       .then((res) => setWatchlist(res.data))
@@ -18,6 +20,20 @@ const WatchList = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  // Price polling — refreshes prices for stocks already in watchlist
+  const refreshPrices = useCallback(() => {
+    if (watchlist.length === 0) return;
+    axios.get(`${API_URL}/watchlist`)
+      .then((res) => setWatchlist(res.data))
+      .catch(() => {}); // silent fail on poll
+  }, [watchlist.length]);
+
+  useEffect(() => {
+    const interval = setInterval(refreshPrices, PRICE_POLL_INTERVAL);
+    return () => clearInterval(interval);
+  }, [refreshPrices]);
+
+  // Debounced search
   useEffect(() => {
     if (!query.trim()) {
       setSearchResults([]);
@@ -36,9 +52,6 @@ const WatchList = () => {
     }, 300);
     return () => clearTimeout(timeout);
   }, [query, watchlist]);
-
-
-  // Real-time updates removed (Socket.io removed)
 
   const handleAdd = async (stock) => {
     try {
@@ -79,15 +92,23 @@ const WatchList = () => {
 
       {query && (
         <div className="search-results-dropdown">
-          {isSearching && <div className="search-result-item muted">Searching...</div>}
+          {isSearching && (
+            <div className="search-result-item muted">Searching...</div>
+          )}
           {!isSearching && searchResults.length === 0 && query && (
             <div className="search-result-item muted">No results for "{query}"</div>
           )}
           {searchResults.map((stock) => (
-            <div key={stock.name} className="search-result-item" onClick={() => handleAdd(stock)}>
+            <div
+              key={stock.name}
+              className="search-result-item"
+              onClick={() => handleAdd(stock)}
+            >
               <div>
                 <span className="wl-name">{stock.name}</span>
-                <span style={{ fontSize: "10px", marginLeft: "6px", color: "var(--color-text-secondary)" }}>{stock.exchange}</span>
+                <span style={{ fontSize: "10px", marginLeft: "6px", color: "var(--color-text-secondary)" }}>
+                  {stock.exchange}
+                </span>
               </div>
               <button
                 className="wl-btn btn-outline"
@@ -114,14 +135,18 @@ const WatchList = () => {
             ))
           ) : (
             <div className="empty-state">
-              <div className="empty-text">{query ? `No results for "${query}"` : "Your watchlist is empty"}</div>
+              <div className="empty-text">
+                {query ? `No results for "${query}"` : "Your watchlist is empty"}
+              </div>
             </div>
           )}
         </div>
       )}
-      
+
       <div className="wl-footer">
-        <button className="wl-foot-btn">+ Add stock</button>
+        <span style={{ fontSize: "11px", color: "var(--color-text-secondary)" }}>
+          {watchlist.length}/50 stocks
+        </span>
       </div>
     </div>
   );
@@ -132,15 +157,45 @@ const WatchListItem = ({ stock, onRemove }) => {
 
   return (
     <div className="wl-item">
-      <span className={`wl-name ${stock.isDown ? "red" : "green"}`}>{stock.name}</span>
+      <span className={`wl-name ${stock.isDown ? "red" : "green"}`}>
+        {stock.name}
+      </span>
       <div className="wl-right">
         <div className="wl-price">{stock.price}</div>
-        <div className={`wl-chg ${stock.isDown ? "red" : "green"}`}>{stock.percent}</div>
+        <div className={`wl-chg ${stock.isDown ? "red" : "green"}`}>
+          {stock.percent}
+        </div>
       </div>
       <div className="wl-actions">
-        <button className="wl-btn buy-btn" onClick={(e) => { e.stopPropagation(); openBuyWindow(stock.name); }}>B</button>
-        <button className="wl-btn sell-btn" onClick={(e) => { e.stopPropagation(); openSellWindow(stock.name); }}>S</button>
-        <button className="wl-btn btn-outline" style={{ marginLeft: "4px" }} onClick={(e) => { e.stopPropagation(); onRemove(stock.name); }}>🗑</button>
+        {/* Pass stock.price so Orders page pre-fills the price */}
+        <button
+          className="wl-btn buy-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            openBuyWindow(stock.name, stock.price);
+          }}
+        >
+          B
+        </button>
+        <button
+          className="wl-btn sell-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            openSellWindow(stock.name, stock.price);
+          }}
+        >
+          S
+        </button>
+        <button
+          className="wl-btn btn-outline"
+          style={{ marginLeft: "4px" }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove(stock.name);
+          }}
+        >
+          🗑
+        </button>
       </div>
     </div>
   );

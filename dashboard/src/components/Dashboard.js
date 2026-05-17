@@ -4,12 +4,15 @@ import { Route, Routes } from "react-router-dom";
 import Apps from "./Apps";
 import Funds from "./Funds";
 import Holdings from "./Holdings";
-
 import Orders from "./Orders";
 import Positions from "./Positions";
 import Summary from "./Summary";
 import WatchList from "./WatchList";
 import { GeneralContextProvider } from "./GeneralContext";
+
+// Note: OrderWindow.js is no longer used.
+// Orders.js has the order form built-in, so OrderWindow is dead code.
+// You can safely delete OrderWindow.js from your project.
 
 const Dashboard = () => {
   return (

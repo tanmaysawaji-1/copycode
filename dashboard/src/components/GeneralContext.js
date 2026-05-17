@@ -2,37 +2,43 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const GeneralContext = React.createContext({
-  openBuyWindow: (uid) => {},
+  openBuyWindow: (uid, price) => {},
   closeBuyWindow: () => {},
-  openSellWindow: (uid) => {},
+  openSellWindow: (uid, price) => {},
   closeSellWindow: () => {},
   selectedStockUID: "",
-  orderType: "buy" // "buy" or "sell"
+  selectedStockPrice: 0,
+  orderType: "buy",
 });
 
 export const GeneralContextProvider = (props) => {
   const navigate = useNavigate();
   const [selectedStockUID, setSelectedStockUID] = useState("");
+  const [selectedStockPrice, setSelectedStockPrice] = useState(0);
   const [orderType, setOrderType] = useState("buy");
 
-  const handleOpenBuyWindow = (uid) => {
+  const handleOpenBuyWindow = (uid, price = 0) => {
     setOrderType("buy");
     setSelectedStockUID(uid);
+    setSelectedStockPrice(Number(price) || 0);
     navigate("/orders");
   };
 
   const handleCloseBuyWindow = () => {
     setSelectedStockUID("");
+    setSelectedStockPrice(0);
   };
 
-  const handleOpenSellWindow = (uid) => {
+  const handleOpenSellWindow = (uid, price = 0) => {
     setOrderType("sell");
     setSelectedStockUID(uid);
+    setSelectedStockPrice(Number(price) || 0);
     navigate("/orders");
   };
 
   const handleCloseSellWindow = () => {
     setSelectedStockUID("");
+    setSelectedStockPrice(0);
   };
 
   return (
@@ -43,7 +49,8 @@ export const GeneralContextProvider = (props) => {
         openSellWindow: handleOpenSellWindow,
         closeSellWindow: handleCloseSellWindow,
         selectedStockUID,
-        orderType
+        selectedStockPrice,
+        orderType,
       }}
     >
       {props.children}
