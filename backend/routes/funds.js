@@ -1,33 +1,59 @@
 const express = require("express");
 const router  = express.Router();
 const { Funds, Transaction } = require("../models/Funds");
+const { Holdingmodel }       = require("../models/Holdingmodel");
 
-// Simulated middleware to attach userId
+const USER_ID = "user123"; // replace with req.user.id once JWT is wired
+
 router.use((req, res, next) => {
-  req.userId = "user123";
+  req.userId = USER_ID;
   next();
 });
 
+// ── GET /funds ────────────────────────────────────────────────
 router.get("/funds", async (req, res) => {
   try {
     const userId = req.userId;
-    let funds = await Funds.findOne({ userId });
 
+    // Auto-create funds account if first visit
+    let funds = await Funds.findOne({ userId });
     if (!funds) {
-      funds = await Funds.create({ userId, availableCash: 4043.10, availableMargin: 4043.10, openingBalance: 4043.10 });
+      funds = await Funds.create({
+        userId,
+        availableCash:   10000.00,
+        availableMargin: 10000.00,
+        openingBalance:  10000.00,
+      });
     }
 
-    const transactions = await Transaction
-      .find({ userId })
+    // ── Calculate usedMargin dynamically from active holdings ─
+    // usedMargin = total current value of all holdings (avg × qty)
+    const holdings   = await Holdingmodel.find({});
+    const usedMargin = parseFloat(
+      holdings.reduce((sum, h) => sum + h.avg * h.qty, 0).toFixed(2)
+    );
+
+    // ── Last 20 transactions (fund adds, withdrawals, orders) ─
+    const transactions = await Transaction.find({ userId })
       .sort({ createdAt: -1 })
       .limit(20);
 
-    res.json({ funds, transactions });
+    res.json({
+      funds: {
+        availableCash:   parseFloat(funds.availableCash.toFixed(2)),
+        availableMargin: parseFloat(funds.availableCash.toFixed(2)), // same as cash for equity
+        openingBalance:  parseFloat(funds.openingBalance.toFixed(2)),
+        usedMargin,       // ← now dynamic, not hardcoded 0
+        payin:            funds.payin || 0,
+      },
+      transactions,
+    });
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch funds" });
   }
 });
 
+// ── POST /funds/add ───────────────────────────────────────────
 router.post("/funds/add", async (req, res) => {
   const { amount, upiId } = req.body;
   const userId = req.userId;
@@ -68,6 +94,7 @@ router.post("/funds/add", async (req, res) => {
   }
 });
 
+// ── POST /funds/withdraw ──────────────────────────────────────
 router.post("/funds/withdraw", async (req, res) => {
   const { amount } = req.body;
   const userId = req.userId;
@@ -81,7 +108,6 @@ router.post("/funds/withdraw", async (req, res) => {
     const existing = await Funds.findOne({ userId });
     if (!existing)
       return res.status(404).json({ error: "No funds account found" });
-
     if (amount > existing.availableCash)
       return res.status(400).json({ error: "Insufficient funds" });
 
