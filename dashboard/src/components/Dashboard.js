@@ -9,6 +9,7 @@ import Positions from "./Positions";
 import Summary from "./Summary";
 import WatchList from "./WatchList";
 import { GeneralContextProvider } from "./GeneralContext";
+import Userwatch from "./Userwatch";
 
 // Note: OrderWindow.js is no longer used.
 // Orders.js has the order form built-in, so OrderWindow is dead code.
@@ -27,6 +28,7 @@ const Dashboard = () => {
             <Route path="/positions" element={<Positions />} />
             <Route path="/funds" element={<Funds />} />
             <Route path="/apps" element={<Apps />} />
+            <Route path="/userwatch" element={<Userwatch/>}/>
           </Routes>
         </div>
       </GeneralContextProvider>

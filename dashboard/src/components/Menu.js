@@ -6,7 +6,9 @@ const menuItems = [
   { label: "Orders", path: "/orders" },
   { label: "Holdings", path: "/holdings" },
   { label: "Positions", path: "/positions" },
-  { label: "Funds", path: "/funds" },
+  { label: "WatchList",path:"/userwatch"},
+  { label: "Funds", path: "/funds" }
+  
 ];
 
 const getCookie = (name) => {

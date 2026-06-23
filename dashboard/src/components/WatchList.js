@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useCallback } from "react";
 import axios from "axios";
 import GeneralContext from "./GeneralContext";
 
-const API_URL = process.env.REACT_APP_API_URL || "https://hungryhub-backend-bgem.onrender.com";
+const API_URL = "http://localhost:3003";
 const PRICE_POLL_INTERVAL = 15000; // 15 seconds
 
 const WatchList = () => {
@@ -14,7 +14,7 @@ const WatchList = () => {
 
   // Initial watchlist load
   useEffect(() => {
-    axios.get(`${API_URL}/watchlist`)
+    axios.get(`${API_URL}/stocks/search`)
       .then((res) => setWatchlist(res.data))
       .catch((err) => console.error("Failed to load watchlist:", err))
       .finally(() => setLoading(false));
@@ -23,7 +23,8 @@ const WatchList = () => {
   // Price polling — refreshes prices for stocks already in watchlist
   const refreshPrices = useCallback(() => {
     if (watchlist.length === 0) return;
-    axios.get(`${API_URL}/watchlist`)
+    // axios.get(`${API_URL}/watchlist`)
+    axios.get(`${API_URL}/stocks/search`)
       .then((res) => setWatchlist(res.data))
       .catch(() => {}); // silent fail on poll
   }, [watchlist.length]);

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import GeneralContext from "./GeneralContext";
 
-const API_URL = process.env.REACT_APP_API_URL || "https://hungryhub-backend-bgem.onrender.com";
+const API_URL ="http://localhost:3003";
 
 const OrderWindow = ({ type }) => {
   const { selectedStockUID, closeBuyWindow, closeSellWindow } = useContext(GeneralContext);

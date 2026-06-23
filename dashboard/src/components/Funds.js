@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL || "https://hungryhub-backend-bgem.onrender.com";
+const API_URL ="http://localhost:3003";
 const UPI_REGEX = /^[\w.\-]+@[\w]+$/;
 
 const Funds = () => {
@@ -16,7 +16,7 @@ const Funds = () => {
 
   const fetchFunds = () => {
     axios.get(`${API_URL}/funds`)
-      .then((res) => { setData(res.data); setLoading(false); })
+      .then((res) => { setData(res.data); setLoading(false);})
       .catch(() => setLoading(false));
   };
 

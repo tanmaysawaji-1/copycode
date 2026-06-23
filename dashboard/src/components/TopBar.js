@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Menu from "./Menu";
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL || "https://hungryhub-backend-bgem.onrender.com";
+const API_URL = "http://localhost:3003";
 
 const TopBar = () => {
   const [indices, setIndices] = useState({ nifty: null, sensex: null });
@@ -10,11 +10,11 @@ const TopBar = () => {
   useEffect(() => {
     const fetchIndices = () =>
       axios.get(`${API_URL}/indices`)
-        .then(r => setIndices(r.data))
-        .catch(err => console.error(err));
+        .then(r =>{setIndices(r.data)})
+        .catch(err => console.log(err));
     
     fetchIndices();
-    const interval = setInterval(fetchIndices, 15000); // refresh every 15s
+    const interval = setInterval(fetchIndices, 1500); // refresh every 15s
     return () => clearInterval(interval);
   }, []);
 
