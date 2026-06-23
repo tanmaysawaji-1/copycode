@@ -1,30 +1,30 @@
 const express = require("express");
 const router  = express.Router();
 const WatchlistModel = require("../models/Watchlist");
-const ALL_STOCKS     = require("../data/stocks");
+const ALL_STOCKS= require("../data/stocks");
 
 const USER_ID = "user123"; // replace with req.user.id once JWT is wired
 
+
 router.use((req, res, next) => {
+  // userId= req.userId;
   req.userId = USER_ID;
   next();
 });
 
 // ── GET /stocks/search ────────────────────────────────────────
 router.get("/stocks/search", (req, res) => {
-  const q = (req.query.q || "").toLowerCase().trim();
-  if (!q) return res.json([]);
+  // const q = (req.query.q || "").toLowerCase().trim();
+  // if (!q) return res.json([]);
 
-  const results = ALL_STOCKS
-    .filter((s) => s.name.toLowerCase().includes(q))
-    .slice(0, 10)
-    .map((s) => ({
-      name:     s.name,
-      price:    s.price,
-      percent:  s.percent || "0.00%",
-      exchange: s.exchange || "NSE",
-      isDown:   (s.percent || "").startsWith("-"),
-    }));
+  const results = ALL_STOCKS;
+    // results.filter((s) => s.name.toLowerCase().includes(q)).slice(0, 10).map((s) => ({
+    //   name:     s.name,
+    //   price:    s.price,
+    //   percent:  s.percent || "0.00%",
+    //   exchange: s.exchange || "NSE",
+    //   isDown:   (s.percent || "").startsWith("-"),
+    // }));
 
   res.json(results);
 });
