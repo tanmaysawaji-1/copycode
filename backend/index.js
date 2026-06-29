@@ -38,8 +38,8 @@ const authRoutes = require("./routes/auth");
 const holdingsRoutes = require("./routes/holdings");
 const positionsRoutes = require("./routes/positions");
 
-const FRONTEND_URL =  "https://trading-lovat-ten.vercel.app/";
-const DASHBOARD_URL =  "https://copycode-pi.vercel.app/";
+const FRONTEND_URL =  "https://trading-lovat-ten.vercel.app";
+const DASHBOARD_URL =  "https://copycode-pi.vercel.app";
 
 app.use(
   cors({

@@ -33,7 +33,7 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!isAuthenticated) {
-    window.location.href = "http://localhost:3000/signup";
+    window.location.href = "https://trading-lovat-ten.vercel.app/signup";
     return null;
   }
 
