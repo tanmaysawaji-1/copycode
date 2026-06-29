@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Menu from "./Menu";
 import axios from "axios";
 
-const API_URL = "http://localhost:3003";
+const API_URL = "https://hungryhub-e81l.onrender.com";
 
 const TopBar = () => {
   const [indices, setIndices] = useState({ nifty: null, sensex: null });
