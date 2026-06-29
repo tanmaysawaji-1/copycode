@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_URL ="http://localhost:3003";
+const API_URL ="https://hungryhub-e81l.onrender.com";
 const UPI_REGEX = /^[\w.\-]+@[\w]+$/;
 
 const Funds = () => {

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const PYTHON_URL = "http://localhost:8000";  // Your Python live service
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3003";
+const API_URL =  "https://hungryhub-e81l.onrender.com";
 
 const StockDetails = () => {
   const location = useLocation();

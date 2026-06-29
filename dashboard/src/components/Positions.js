@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import GeneralContext from "./GeneralContext";
 
-const API_URL ="http://localhost:3003";
+const API_URL ="https://hungryhub-e81l.onrender.com";
 
 const Positions = () => {
   const [allPositions, setAllPositions] = useState([]);

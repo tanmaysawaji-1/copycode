@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { LineChart, Line, Tooltip, ResponsiveContainer } from "recharts";
 
-const API_URL = "http://localhost:3003";
+const API_URL = "https://hungryhub-e81l.onrender.com";
 
 const getCookie = (name) => {
   const value = `; ${document.cookie}`;

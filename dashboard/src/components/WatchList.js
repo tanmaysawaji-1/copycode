@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useCallback } from "react";
 import axios from "axios";
 import GeneralContext from "./GeneralContext";
 
-const API_URL = "http://localhost:3003";
+const API_URL = "https://hungryhub-e81l.onrender.com";
 const PRICE_POLL_INTERVAL = 15000; // 15 seconds
 
 const WatchList = () => {
